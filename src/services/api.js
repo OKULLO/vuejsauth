@@ -1,1 +1,1 @@
-export const apiUrl =`http://localhost:9090`
+export const apiUrl =`https://usermanagement-okullo.cloud.okteto.net`
