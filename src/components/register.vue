@@ -129,7 +129,7 @@ export default {
 
               return axios.post(`${apiUrl}/api/v1/auth/register`,{email,password,username,contact}).then(
                   response => {
-                    console.log(response.data)
+                    // console.log(response.data)
 
                      if (response.data.success){
                          this.message = response.data.message
@@ -140,10 +140,12 @@ export default {
                         },2000)
                        
 
+                     }else{
+                      this.error =response.data.error;
                      }
 
                 }).catch(e=>{
-                  this.error = "Sorry something wrong try again"
+                  this.error = e.response.data.error
                   console.log(e)
                 });
                 

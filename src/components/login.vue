@@ -29,7 +29,13 @@
                           <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 col-xlg-6 my-2">
                               <small class="text-muted">
-                                  <router-link class="link success theme-color" to="/forgotpassword">Forgot Password ?</router-link></small>
+                                  <router-link class="link success theme-color" to="/forgotpassword">Forgot Password ?</router-link>
+                                       <div class="col-12 mt-3 text-left">
+                          <small class="color-theme">Don't have an account? <router-link class="" to="/register">Sign Up</router-link></small>
+                        </div>
+
+                                </small>
+                             
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-12 col-lg-6 col-xlg-6 my-2 text-right">
                               <div class="form-group">
@@ -94,8 +100,11 @@ export default {
 
             const { email, password } = this;
 
-                        console.log('clicked')
-           
+                if(email=="" || password==""){
+                  this.error ='Please provide a passsword and email to login !'
+                }else{
+
+
                  return axios.post(`${apiUrl}/api/v1/auth/login`,{email: email,password:password})
                 .then(user => {
                     // login successful if there's a jwt token in the response
@@ -110,6 +119,8 @@ export default {
                           this.$router.push('/home')
                         },2000)
                       this.error = user.data.error
+                    }else if(user.data.error){
+                      this.error = user.data.error
                     }
 
                     // return user;
@@ -118,6 +129,9 @@ export default {
                   this.error ="sorry something went wrong";
                   console.log(e)
                 });
+
+                }
+         
                 
         }
     }
